@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import styles from "./sidebar.module.css";
 import "../../globals.css";
 import React, { useState } from "react";
@@ -11,76 +11,46 @@ import { FaInstagram, FaYoutube } from "react-icons/fa";
 import Link from "next/link";
 
 const Sidebar = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  
-  const followStyle = {
-    borderTop: "1px solid rgba(255, 255, 255, 0.2)",
-  };
-
   return (
     <div
-      style={{ borderRight: "1px solid rgba(255, 255, 255, 0.2)" }}
-      className={`h-screen w-full border-white robo ${styles.nav}`}
+      className={`h-screen border-r border-white/20 bg-black fixed top-0 left-0 hidden sm:flex flex-col items-center transition-all duration-300  sm:w-[100px] lg:w-[200px]  `} // Adjusted width for Tablet & Desktop
     >
-      <div className="w-46 flex">
-        <ul className="ml-7 tracking-widest">
-          <li>
-            <h1 className="text-white mt-8 tracking-widest text-2xl">ℬ𝒶𝒹𝓍𝒷ℴ𝓎</h1>
-          </li>
-          <Link href={"/"}>
-            <li className={styles.ulsidebar}>
-              <IoHomeOutline className="text-2xl" />
-              <h2 className="tracking-widest ml-4">Home</h2>
-            </li>
-          </Link>
-          <Link href={"/pages/search/category"}>
-            <li className={styles.ulsidebar}>
-              <TbCategory2 className="tracking-widest text-2xl" />
-              <h2 className="ml-4">Category</h2>
-            </li>
-          </Link>
-          <Link href={"/pages/search/flowframe"}>
-            <li className={styles.ulsidebar}>
-              <MdOutlineSlowMotionVideo className="text-2xl" />
-              <h2 className="ml-4">Flowframe</h2>
-            </li>
-          </Link>
-          <Link href={"/pages/search/raw"}>
-            <li className={styles.ulsidebar}>
-              <CiVideoOn className="text-2xl" />
-              <h2 className="ml-4">Raw</h2>
-            </li>
-          </Link>
-          <Link href={"/pages/search/audio"}>
-            <li className={styles.ulsidebar}>
-              <LuMusic2 className="text-2xl" />
-              <h2 className="ml-4">Anime Dialogue</h2>
-            </li>
-          </Link>
-          <Link href={"/pages/search/wallpaper"}>
-            <li className={styles.ulsidebar}>
-              <LuWallpaper className="text-2xl" />
-              <h2 className="ml-4">Anime Wallpaper</h2>
-            </li>
-          </Link>
-        </ul>
+      {/* Logo (Hidden on Tablet) */}
+      <div className="text-white text-2xl  flex text-center justify-center items-center sm:md:h-[10vh] font-bold tracking-widest  border-b border-white/20  md:block ">
+        <h1 className="sm:md:text-base sm:md:mt-20">
+          ℬ𝒶𝒹𝓍𝒷ℴ𝓎
+        </h1>
       </div>
-      <div className="ml7">
-        <ul style={followStyle} className="mt-5 tracking-widest">
-          <li className="text-slate-100 robo flex ml-7 items-center text-base mt-8">
-            <h1>Follow Us</h1>
-          </li>
-          <li className="text-slate-100 robo flex ml-7 items-center text-base mt-8">
-            <FaInstagram className="text-2xl" />
-            <h2 className="ml-4 robo">Instagram</h2>
-          </li>
-          <li className="text-slate-100 ml-7 robo flex items-center text-base mt-8">
-            <FaYoutube className="text-2xl" />
-            <h2 className="ml-4 robo">Youtube</h2>
-          </li>
+
+      {/* Navigation */}
+      <ul className="flex flex-col items-center w-full sm:h-[70vh] justify-evenly  mt-8 space-y-6">
+        <SidebarLink href="/" icon={<IoHomeOutline />} text="Home" />
+        <SidebarLink href="/pages/search/category" icon={<TbCategory2 />} text="Category" />
+        <SidebarLink href="/pages/search/flowframe" icon={<MdOutlineSlowMotionVideo />} text="Flowframe" />
+        <SidebarLink href="/pages/search/raw" icon={<CiVideoOn />} text="Raw" />
+        <SidebarLink href="/pages/search/audio" icon={<LuMusic2 />} text="Anime Dialogue" />
+        <SidebarLink href="/pages/search/wallpaper" icon={<LuWallpaper />} text="Anime Wallpaper" />
+      </ul>
+
+      {/* Social Links */}
+      <div className="mt-auto mb-6 w-full border-t border-white/20">
+        <h2 className="text-gray-300 text-sm mt-4 ml-4 hidden lg:block">Follow Us</h2>
+        <ul className="flex flex-col items-center w-full space-y-4 mt-3">
+          <SidebarLink href="#" icon={<FaInstagram />} text="Instagram" />
+          <SidebarLink href="#" icon={<FaYoutube />} text="Youtube" />
         </ul>
       </div>
     </div>
+  );
+};
+
+// Sidebar Link Component
+const SidebarLink = ({ href, icon, text }) => {
+  return (
+    <Link href={href} className="flex items-center space-x-3 text-white text-lg hover:bg-white/10 p-2 rounded-lg w-[90%] justify-center lg:justify-start">
+      <span className="text-2xl">{icon}</span>
+      <span className="hidden lg:inline">{text}</span>
+    </Link>
   );
 };
 

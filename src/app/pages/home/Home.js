@@ -10,7 +10,7 @@ import Footer from "../../component/footer/footer"
 
 const Home = () => {
     return (
-        <div className="sm:w-[full] w-full  ">
+        <div className="sm:w-[full] w-full  flex justify-center flex-col">
             <Header />
             <Hero/>
             <Cards/>

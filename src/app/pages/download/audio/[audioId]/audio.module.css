@@ -186,9 +186,3 @@
     color:rgba(65,43,230,1) ;
     text-shadow: rgba(65,43,230,1) 0px 0px 206px;
 }
-.div2{
-    width: calc(100vw - 700px);
-    display: flex;
-    justify-content: center;
-    
-}

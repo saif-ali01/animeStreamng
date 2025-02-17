@@ -16,10 +16,40 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-
 body {
   display: flex;
+  overflow-x: hidden;
   background-color: #000000;
+}
+
+/* Main Content Default */
+.main-content {
+  width: calc(100vw - 15vw); /* Full width minus sidebar */
+  margin-left: 15vw; /* Sidebar offset */
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Tablet and Mobile Screens */
+@media (max-width: 1024px) {
+  .main-content {
+    width: calc(100vw - 70px); /* Adjust for small sidebar */
+    margin-left: 70px;
+  }
+}
+
+/* Mobile View (Hide Sidebar) */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none; /* Hide sidebar */
+  }
+
+  .main-content {
+    width: 100vw !important; /* Take full width */
+    margin-left: 0 !important; /* No margin */
+  }
 }
 
 @layer utilities {
@@ -112,8 +142,7 @@ body {
   font-weight: bold;
 }
 .downloadbtn{
-  width: 12rem;
-  height: 4rem;
+
   margin-top: 4rem;
   margin-left: 10rem;
   border-radius: 1rem;
@@ -224,4 +253,10 @@ label {
   letter-spacing: 2px;
   color:rgba(65,43,230,1) ;
   text-shadow: rgba(65,43,230,1) 0px 0px 206px;
+}
+/* globals.css or sidebar.module.css */
+@media (max-width: 1024px) {
+  .lg\\:hidden {
+    display: none !important; /* Ensures the button only shows on mobile */
+  }
 }

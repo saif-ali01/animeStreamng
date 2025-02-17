@@ -8,7 +8,8 @@ import WallpaperCard from '../../component/wallpaper/WallpaperCard';
 import TrendingCard from '../../component/trendingCard/TrendingCard';
 import Link from 'next/link';
 import "../../globals.css"
-const page = () => {
+
+const Page = () => {
     const slide = {
         title: "jujutsu kaisen",
         date: "2024-02-09",
@@ -18,7 +19,6 @@ const page = () => {
         image: '/m.jpg',
         title: 'one piece',
         date: '2024-02-14',
-
     }
     const rawData = {
         previewImage: '/m.jpg',
@@ -54,87 +54,91 @@ const page = () => {
     const params = useParams();
     const router = useRouter();
     const path = usePathname();
+
     return (
-        <div className={`text-white ml-60 w-screen`}>
+        <div className={`text-white sm:w-[full] w-full  flex justify-center flex-col`}>
             <Search />
             <div className={`w-full mt-5`}>
                 <div className="flex flex-col gap-7">
-                    <h1 className='flex justify-center ml-5 text-blue-500  tracking-widest '><span className={`w-full lg:text-7xl text-3xl mt-16 Latotext `}>Categories</span></h1>
-                    <div className="mt-3 grid xl:grid-cols-3  sm:grid-cols-2 gap-4">
-
-                        {
-                            numbers.map((number) => (
-                                <Link href={"/pages/download/audio/111"}><TrendingCard key={number} data={slide} /></Link>
-
-                            ))
-                        }
+                    <h1 className='flex justify-center ml-5 text-blue-500  tracking-widest'>
+                        <span className={`w-full text-3xl lg:text-7xl mt-16 Latotext`}>Categories</span>
+                    </h1>
+                    <div className="mt-3 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mx-5">
+                        {numbers.map((number) => (
+                            <Link key={number} href={"/pages/download/trending/111"}>
+                                <TrendingCard data={slide} />
+                            </Link>
+                        ))}
                     </div>
                 </div>
 
                 <div className="flex flex-col gap-7">
-                    <h1 className='flex justify-center Latotext  ml-5 text-blue-500  tracking-widest '><span className={`w-full lg:text-7xl text-3xl mt-16 `}>Twistors</span></h1>
-
-                    <div className="mt-3 grid xl:grid-cols-3  sm:grid-cols-2 gap-4">
-                        {
-                            numbers.map((number) => (
-                                <Link href={"/pages/download/audio/111"}><Card key={number} dummyData={videoData} /></Link>
-
-                            ))
-                        }
+                    <h1 className='flex justify-center Latotext ml-5 text-blue-500 tracking-widest'>
+                        <span className={`w-full text-3xl lg:text-7xl mt-16`}>Twistors</span>
+                    </h1>
+                    <div className="mt-3 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mx-5">
+                        {numbers.map((number) => (
+                            <Link key={number} href={"/pages/download/video/111"}>
+                                <Card dummyData={videoData} />
+                            </Link>
+                        ))}
                     </div>
                 </div>
+
                 <div className="flex flex-col gap-7">
-                    <h1 className='flex justify-center Latotext  ml-5 text-blue-500  tracking-widest '><span className={`w-full lg:text-7xl text-3xl mt-16 `}>Raw</span></h1>
-                    <div className="mt-3 grid xl:grid-cols-3  sm:grid-cols-2 gap-4">
-                        {
-                            numbers.map((number) => (
-                                <Link href={"/pages/download/audio/111"}><Card key={number} dummyData={rawData} /></Link>
-
-                            ))
-                        }
+                    <h1 className='flex justify-center Latotext ml-5 text-blue-500 tracking-widest'>
+                        <span className={`w-full text-3xl lg:text-7xl mt-16`}>Raw</span>
+                    </h1>
+                    <div className="mt-3 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mx-5">
+                        {numbers.map((number) => (
+                            <Link key={number} href={"/pages/download/flowframe/111"}>
+                                <Card dummyData={rawData} />
+                            </Link>
+                        ))}
                     </div>
                 </div>
+
                 <div className="flex flex-col gap-7">
-                    <h1 className='flex justify-center Latotext  ml-5 text-blue-500  tracking-widest '><span className={`w-full lg:text-7xl text-3xl mt-16 `}>Flow Frame</span></h1>
-                    <div className="mt-3 grid xl:grid-cols-3  sm:grid-cols-2 gap-4">
-                        {
-                            numbers.map((number) => (
-                                <Link href={"/pages/download/audio/111"}><Card key={number} dummyData={flowFrameData} /></Link>
-
-                            ))
-                        }
+                    <h1 className='flex justify-center Latotext ml-5 text-blue-500 tracking-widest'>
+                        <span className={`w-full text-3xl lg:text-7xl mt-16`}>Flow Frame</span>
+                    </h1>
+                    <div className="mt-3 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mx-5">
+                        {numbers.map((number) => (
+                            <Link key={number} href={"/pages/download/raw/111"}>
+                                <Card dummyData={flowFrameData} />
+                            </Link>
+                        ))}
                     </div>
                 </div>
+
                 <div className="flex flex-col gap-7">
-                    <h1 className='flex justify-center Latotext  ml-5 text-blue-500  tracking-widest '><span className={`w-full lg:text-7xl text-3xl mt-16 `}>Dialouges</span></h1>
-                    <div className="mt-3 grid xl:grid-cols-3  sm:grid-cols-2 gap-4">
-                        {
-                            numbers.map((number) => (
-                                <Link href={"/pages/download/audio/111"}><AudioCard key={number} data={dummyData} /></Link>
-
-                            ))
-                        }
+                    <h1 className='flex justify-center Latotext ml-5 text-blue-500 tracking-widest'>
+                        <span className={`w-full text-3xl lg:text-7xl mt-16`}>Dialogues</span>
+                    </h1>
+                    <div className="mt-3 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mx-5">
+                        {numbers.map((number) => (
+                            <Link key={number} href={"/pages/download/audio/111"}>
+                                <AudioCard data={dummyData} />
+                            </Link>
+                        ))}
                     </div>
                 </div>
+
                 <div className="flex flex-col gap-7">
-                    <h1 className='flex justify-center Latotext  ml-5 text-blue-500  tracking-widest '><span className={`w-full lg:text-7xl text-3xl mt-16 `}>Wallpapers</span></h1>
-
-                    <div className="mt-3 grid xl:grid-cols-3  sm:grid-cols-2 gap-4">
-                        {
-                            numbers.map((number) => (
-                                <Link href={"/pages/download/audio/111"}><WallpaperCard key={number} dummyData={wallpaperData} /></Link>
-
-                            ))
-                        }
+                    <h1 className='flex justify-center Latotext ml-5 text-blue-500 tracking-widest '>
+                        <span className={`w-full text-3xl lg:text-7xl mt-16`}>Wallpapers</span>
+                    </h1>
+                    <div className="mt-3 grid grid-col-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 mx-5">
+                        {numbers.map((number) => (
+                            <Link key={number} href={"/pages/download/wallpaper/111"}>
+                                <WallpaperCard dummyData={wallpaperData} />
+                            </Link>
+                        ))}
                     </div>
                 </div>
-
-
-
             </div>
-
         </div>
     )
 }
 
-export default page
+export default Page;

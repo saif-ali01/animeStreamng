@@ -61,13 +61,13 @@ const Page = () => {
     };
 
     return (
-        <div className='text-white  flex ml-60 h-screen'>
-            <div className="flex justify-center items-center">
+        <div className='text-white sm:w-[full] w-full  flex h-screen'>
+            <div className="flex justify-center  items-center sm:w-1/2 w-full">
 
 
-                <div className={`ml-24 rounded-md ${styles.container}`}>  </div>
+                <div className={` rounded-md ${styles.container}`}>  </div>
 
-                <div className={`${styles.main} ml-24 overflow-hidden pb-12`}>
+                <div className={`${styles.main} overflow-hidden pb-12`}>
                     <div className={`flex justify-center h-60 items-center`}>
 
                         <div className={`flex ${styles.audioImg}`}>
@@ -137,19 +137,23 @@ const Page = () => {
                         Your browser does not support the audio element.
                     </audio>
                 </div>
+                <div className=" sm:hidden w-40 h-10 absolute z-[1000] bottom-5 mr-32  cursor-pointer downloadbtn flex justify-center items-center">
+                <a href="/audio.mp3" download className='cursor-pointer  text-xl font-bold uppercase  text-black' style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}> Download</a>
             </div>
-            <div className={` ${styles.div2} `}>
+            </div>
+            <div className={` sm:w-[1/2] sm:flex hidden `}>
                 <div className=" ">
-                    <h1 className='flex justify-center Latotext text-blue-900  tracking-widest text-3xl'><span className={`w-full ${styles.textShadow} text-7xl mt-16 `}> ONE PIECE</span></h1>
+                    <h1 className='flex justify-center Latotext text-blue-900  tracking-widest sm:text-xl md:text-3xl '><span className={`w-full ${styles.textShadow} text-7xl mt-16 `}> ONE PIECE</span></h1>
                     <h2 className={` ${styles.textShadow} text-3xl mt-24 `}> <span className='text-blue-700 opacity-90'>Charater Name</span></h2>
                     <h2 className={`text-gray-900 ${styles.textShadow} opacity-75  text-xl w-96 mt-14 `}> <span className='text-gray-500'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi sunt similique veritatis, architecto omnis.</span></h2>
-                     
-                    <div className="cursor-pointer downloadbtn flex justify-center items-center">
-                        <a href="/audio.mp3" download className='text-2xl font-bold uppercase  text-black' style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}> Download</a>
+
+                    <div className=" cursor-pointer downloadbtn flex justify-center items-center">
+                        <a href="/audio.mp3" download className='cursor-pointer  text-2xl font-bold uppercase  text-black' style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}> Download</a>
                     </div>
                 </div>
 
             </div>
+          
 
 
         </div>

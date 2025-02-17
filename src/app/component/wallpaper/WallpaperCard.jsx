@@ -1,64 +1,57 @@
-"use client"
-import React, { useState } from 'react';
-import { FaDownload, FaHeart, FaRegHeart } from 'react-icons/fa';
+"use client";
+import React, { useState } from "react";
+import { FaDownload, FaHeart, FaRegHeart } from "react-icons/fa";
 import "../../globals.css";
- 
-const WallpaperCard = ({dummyData}) => {
+
+const WallpaperCard = ({ dummyData }) => {
   const [hovered, setHovered] = useState(false);
   const [heart, setHeart] = useState(false);
 
-  const handleMouseEnter = () => {
-    setHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setHovered(false);
-  };
-
-  const handleHeart = () => {
-    setHeart(!heart); // Toggle between true and false
-  };
-
   return (
-   
+    <div
+      className="relative h-48 sm:h-64 md:h-72 w-full max-w-[140px] sm:max-w-[180px] md:max-w-[200px] mx-auto rounded-xl overflow-hidden shadow-lg transition-all duration-300"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Image */}
+      <img
+        src={dummyData.image}
+        className={`w-full h-full object-cover transition-all duration-300 ${
+          hovered ? "opacity-40 scale-105" : "opacity-100 scale-100"
+        }`}
+        alt={dummyData.title}
+      />
+
+      {/* Like Button */}
       <div
-        className="relative h-96 w-64 mt-3 rounded-2xl ml-4 overflow-hidden "
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        className={`absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 text-2xl sm:text-3xl cursor-pointer transition-opacity duration-300 ${
+          hovered ? "opacity-100" : "opacity-0"
+        }`}
+        onClick={() => setHeart(!heart)}
       >
-        <img
-          src={dummyData.image}
-          className={`w-full h-full object-cover transition-all ${
-            hovered ? 'opacity-40' : 'opacity-100'
-          }`}
-          alt=""
-        />
-        {heart ?  (
-          <FaHeart
-            className={`absolute ml-20 top-1/2 transform cursor-pointer -translate-x-1/2 -translate-y-1/2 font-extrabold z-50 text-4xl text-red-400 ${
-              hovered ? 'opacity-100' : 'opacity-0'
-            }`}
-            onClick={handleHeart}
-          />
-        ):(
-          <FaRegHeart
-            className={`absolute cursor-pointer ml-20 top-1/2 transform -translate-x-1/2 -translate-y-1/2 font-extrabold z-50 text-4xl text-red-400  ${
-              hovered ? 'opacity-100' : 'opacity-0'
-            }`}
-            onClick={handleHeart}
-          />
-        ) }
-        <FaDownload  className={`absolute ml-40 top-1/2 transform cursor-pointer -translate-x-1/2 -translate-y-1/2 font-extrabold z-50 text-4xl text-green-400 ${
-              hovered ? 'opacity-100' : 'opacity-0'
-            }`}
-           
-          />
-            <div className="absolute bottom-0 left-0 Latotext italic  text-3xl z-50 text-black p-2 w-full glassmorphismbg from-neutral-900">
-                <h1 className=' text-gray-300 font-extrabold tracking-wider'>{dummyData.title}</h1>
-          
-        </div>
+        {heart ? (
+          <FaHeart className="text-red-500 drop-shadow-lg" />
+        ) : (
+          <FaRegHeart className="text-red-500 drop-shadow-lg" />
+        )}
       </div>
-   
+
+      {/* Download Button */}
+      <div
+        className={`absolute top-1/2 right-[20%] transform -translate-x-1/2 -translate-y-1/2 text-2xl sm:text-3xl cursor-pointer transition-opacity duration-300 ${
+          hovered ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <FaDownload className="text-blue-300 drop-shadow-lg " />
+      </div>
+
+      {/* Title Overlay */}
+      <div className="absolute bottom-0 left-0 w-full text-center p-2 bg-black bg-opacity-50">
+        <h1 className="text-gray-300 font-extrabold text-sm sm:text-base">
+          {dummyData.title}
+        </h1>
+      </div>
+    </div>
   );
 };
 
