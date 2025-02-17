@@ -1,0 +1,16 @@
+.boxShadow{
+    -webkit-box-shadow:-5px -5px  20px rgb(107, 52, 151);
+-moz-box-shadow: -5px -5px  20px rgb(107, 52, 151);
+box-shadow: -5px -5px  20px rgb(107, 52, 151);
+}
+.blurBackground{
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 12px;
+}
+.textShadow{
+    
+    font-weight: 900;
+    font-family:  'Lato'; 
+    letter-spacing: 6px;
+    text-shadow: rgba(65,43,230,1) 110px 101px 206px;
+}

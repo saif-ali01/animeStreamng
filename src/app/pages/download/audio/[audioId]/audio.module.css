@@ -1,0 +1,194 @@
+.container {
+    position: absolute;
+    overflow: hidden;
+    width: 350px;
+    height: 90vh;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    background: rgb(33, 2, 80);
+    background: linear-gradient(90deg, rgba(33, 2, 80, 0.9360119047619048) 28%, rgba(71, 9, 121, 1) 89%);
+    height: 60vh;
+    width: 150px;
+    animation: moving 2s linear infinite;
+}
+
+.container::after {
+    content: "";
+    z-index: 2;
+    position: absolute;
+    inset: 5px;
+    border-radius: 10px;
+    background-color: black;
+}
+
+.audioImg {
+    z-index: 444; /* Set a higher z-index */
+    height: 12rem;
+    width: 12rem;
+    border-radius:10px ;
+    background: rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-box-shadow:0px 0px 98px 85px rgba(134,33,184,0.14);
+    -moz-box-shadow: 0px 0px 98px 85px rgba(134,33,184,0.14);
+    box-shadow: 0px 0px 98px 85px rgba(134,33,184,0.14);
+    
+}
+
+
+
+.main{
+
+    z-index: 999;
+    width: 350px;
+    height: 90vh;
+    border-radius:10px;
+    /* background: rgba(255, 255, 255, 0.03); */
+    
+}
+
+@keyframes moving {
+    0% {
+        transform: translateX(-100px) translateY(-50vh); /* Move to the initial position */
+    }
+    25% {
+        transform: translateX(250px) translateY(-50vh); /* Move to the right */
+    }
+    50% {
+        transform: translateX(250px) translateY(85vh); /* Move down */
+    }
+    75% {
+        transform: translateX(-10px) translateY(75vh); /* Move to the left */
+    }
+    100% {
+        transform: translateX(0) translateY(0); /* Move up to the initial position */
+    }
+}
+
+
+.range{
+    -webkit-appearance: none;
+    cursor: pointer;
+    box-shadow: inset 0 0 5px rgba(0,0,0,1);
+    background: rgba(255, 255, 255, 0.2);
+    height:5px;
+}
+.range::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    width: 1px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(33, 2, 80, 0.9360119047619048) 28%, rgba(71, 9, 121, 1) 89%);
+    cursor: pointer;
+    box-shadow: -407px 10px 0px 407px rgb(107, 52, 151);
+}
+.boxContainer{
+    display: flex; 
+    height: 80px;
+    width: 100%;
+
+}
+.box{
+    margin-left: 10px;
+    transform: scale(.4);
+    height: 100%;
+    width: 10px;
+    background: rgb(107, 52, 151) ;
+    animation-duration: 1.2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    border-radius: 10px;
+}
+@keyframes quiet{
+    25%{
+        transform: scaleY(.6);
+    }
+    50%{
+        transform: scaleY(.4);
+    } 75%{
+        transform: scaleY(.8);
+    }
+}
+@keyframes normal{
+    25%{
+        transform: scaleY(1);
+    }
+    50%{
+        transform: scaleY(.4);
+    } 75%{
+        transform: scaleY(.6);
+    }
+}
+@keyframes loud{
+    25%{
+        transform: scaleY(1);
+    }
+    50%{
+        transform: scaleY(.4);
+    } 75%{
+        transform: scaleY(1.2);
+    }
+}
+.box1{
+    animation-name: quiet;
+}
+.box2{
+    animation-name: normal;
+}.box3{
+    animation-name: quiet;
+}.box4{
+    animation-name: loud;
+}.box5{
+    animation-name: quiet;
+}.box6{
+    animation-name: normal;
+}.box7{
+    animation-name: quiet;
+}
+.duration {
+    animation: ping ease-in-out infinite;
+    animation-duration: 2s;
+}
+
+@keyframes ping {
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+.animate-ping {
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.text{
+    font-weight: 700;
+    font-size: 2rem;
+    font-family:  'Lato'; 
+    letter-spacing: 2px;
+    color:rgba(65,43,230,1) ;
+
+    text-shadow: rgba(65,43,230,1) 0px 0px 206px;
+}
+.p{
+    color:rgba(65,43,230,.8) ;
+    font-weight: 200;
+    font-size: 10px;
+    font-family:  'Lato'; 
+    letter-spacing: 2px;
+    text-shadow: rgba(65,43,230,1) 0px 0px 206px;
+}
+.textShadow{
+    
+    font-weight: 700;
+    font-family:  'Lato'; 
+    letter-spacing: 2px;
+    color:rgba(65,43,230,1) ;
+    text-shadow: rgba(65,43,230,1) 0px 0px 206px;
+}
+.div2{
+    width: calc(100vw - 700px);
+    display: flex;
+    justify-content: center;
+    
+}

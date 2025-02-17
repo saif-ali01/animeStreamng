@@ -1,0 +1,82 @@
+.bgImg {
+  filter: blur(0.6px);
+  /* Remove width/height from CSS since we're using Next.js Image props */
+}
+
+.profileImg {
+  margin-bottom: 10px;
+  width: 100%;  /* Changed from 500% */
+  height: 100%;
+  object-fit: cover;
+  box-shadow: rgba(224, 228, 230, 0.12) 0px 2px 4px 0px, rgba(191, 194, 196, 0.32) 0px 2px 16px 0px;
+}
+
+.boxShadow {
+  box-shadow: rgba(202, 205, 207, 0.12) 0px 2px 4px 0px, rgba(206, 207, 207, 0.32) 0px 2px 16px 0px;
+}
+
+.boderrgba {
+  border-bottom: 4px solid white;
+}
+
+.searchbox {
+  position: relative;  /* Ensure it stays in place */
+  z-index: 1000;  /* Higher than any other element */
+  background: none;
+  border-radius: 50px;
+  box-sizing: border-box;
+  font-family: Comic Sans MS;
+  font-size: 26px;
+  color: #ffd52d;
+  outline: none;
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile View */
+@media (max-width: 640px) {
+  .searchbox {
+    width: 60px; /* Larger search box on mobile */
+    height: 60px; /* Larger search box on mobile */
+  }
+  .profileImg{
+    z-index: 3;
+  }
+  .searchbox:hover {
+    height: 30px;
+  }
+
+}
+
+.inputsearch {
+  background: none;
+  width: 0;  /* Hidden by default */
+  transition: width 0.3s ease;  /* Smooth transition */
+}
+
+/* Show input on hover */
+.searchbox:hover .inputsearch {
+  width: 100%;  /* Full width of the parent box */
+  outline: rgba(255,255,255,0.1);
+}
+
+.searchbox:hover {
+  width: 350px;
+  background: gray;
+margin-left: 4px;
+  border-radius: 10px;
+}
+
+.search {
+  color: white;
+  font-size: 2.5rem;
+  z-index: 1000; /* Ensure the icon is always on top */
+  transition: 0.3s ease;
+}
+
+/* Hide the search icon when the search box is active (hovered) */
+.searchbox:hover .search {
+  display: none;
+}

@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  display: flex;
+  background-color: #000000;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+.boxShadow{
+  box-shadow: 0px -20px 34px -15px rgba(196,187,187,0.86) inset;
+-webkit-box-shadow: 0px -20px 34px -15px rgba(196,187,187,0.86) inset;
+-moz-box-shadow: 0px -20px 34px -15px rgba(196,187,187,0.86) inset;
+}
+
+
+.autoplay-progress {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--swiper-theme-color);
+}
+
+.autoplay-progress svg {
+  --progress: 0;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  stroke-width: 4px;
+  stroke: var(--swiper-theme-color);
+  fill: none;
+  stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
+  stroke-dasharray: 125.6;
+  transform: rotate(-90deg);
+}
+.Latotext{
+  font-family: 'Lato';
+  
+}
+.cardNameText{
+  font-family: 'Protest Revolution';
+  font-weight: 600;
+  font-style: italic;
+}
+.robo{
+  font-family: 'Roboto', sans-serif;
+}
+.glassmorphismbg {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: background 0.3s ease-in-out;
+}
+
+.glassmorphismbg.hovered {
+  background: rgba(255, 255, 255, 0.2); /* Adjust the opacity as needed */
+}
+.neumorphism{
+  /* width: 350px;
+  height: 60px; */
+  background-color: #f5ecec; /* Light gray color for the background */
+  border-radius: 5px; /* Adjust the border-radius for a softer look */
+  box-shadow: inset 1px 1px 3px #000000, inset -1px -1px 3px #030202; /* Inner shadow effect */
+ 
+}
+.audioText{
+  
+  font-family: 'Roboto', sans-serif;
+  font-weight: 800;
+  margin-top: 10px;
+  margin-left: 15px;
+}
+.glass{
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-family: Arial, sans-serif; /* Choose a suitable font */
+  font-weight: bold;
+}
+.downloadbtn{
+  width: 12rem;
+  height: 4rem;
+  margin-top: 4rem;
+  margin-left: 10rem;
+  border-radius: 1rem;
+  background-color: #29C5F6;
+  box-shadow: -7px 5px 24px -12px rgba(41,197,246,0.89);
+-webkit-box-shadow: -7px 5px 24px -12px rgba(41,197,246,0.89);
+-moz-box-shadow: -7px 5px 24px -12px rgba(41,197,246,0.89);
+}
+.shadow{
+  -webkit-box-shadow: 3px 6px 13px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 6px 13px 0px rgba(0,0,0,0.75);
+box-shadow: 3px 6px 13px 0px rgba(0,0,0,0.75)
+}
+.blr{
+  backdrop-filter: blur(0.5px);
+}
+.innershadow{
+  -webkit-box-shadow: inset 3px 6px 58px 27px rgba(5,4,5,1);
+  -moz-box-shadow: inset 3px 6px 58px 27px rgba(5,4,5,1);
+  box-shadow: inset 3px 6px 58px 27px rgba(5,4,5,1);
+}
+
+/* serach  bar*/
+:root {
+  --rad: .7rem;
+  --dur: .3s;
+  --color-dark: #2f2f2f;
+  --color-light: #fff;
+  --color-brand: #57bd84;
+  --font-fam: 'Lato', sans-serif;
+  --height: 5rem;
+  --btn-width: 6rem;
+  --bez: cubic-bezier(0, 0, 0.43, 1.49);
+}
+
+
+form {
+  position: relative;
+  width: 80%;
+  background: var(--color-brand);
+  border-radius: var(--rad);
+}
+
+input,
+button {
+  height:3rem;
+  font-family: var(--font-fam);
+  border: 0;
+  color: var(--color-dark);
+  font-size: 1.8rem;
+}
+
+input[type="search"] {
+  outline: 0; /* <-- shold probably remove this for better accessibility, adding for demo aesthetics for now. */
+  width: 100%;
+  background: var(--color-light);
+  padding: 0 1.6rem;
+  border-radius: var(--rad);
+  appearance: none; /* for iOS input[type="search"] roundedness issue. border-radius alone doesn't work */
+  transition: all var(--dur) var(--bez);
+  transition-property: width, border-radius;
+  z-index: 1;
+  position: relative;
+}
+
+button {
+  display: none; /* prevent being able to tab to it */
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--btn-width);
+  font-weight: bold;
+  background: var(--color-brand);
+  border-radius: 0 var(--rad) var(--rad) 0;
+}
+
+input:not(:placeholder-shown) {
+  border-radius: var(--rad) 0 0 var(--rad);
+  width: calc(100% - var(--btn-width));
+}
+
+input:not(:placeholder-shown) + button {
+  display: block;
+}
+
+label {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+.textShadow{
+    
+  font-family:  'Lato'; 
+  letter-spacing: 2px;
+  text-shadow: rgba(0,0,0,1) 110px 101px 206px;
+}
+
+
+
+.textShadow1{
+    
+  font-weight: 700;
+  font-family:  'Lato'; 
+  letter-spacing: 2px;
+  color:rgba(65,43,230,1) ;
+  text-shadow: rgba(65,43,230,1) 0px 0px 206px;
+}
