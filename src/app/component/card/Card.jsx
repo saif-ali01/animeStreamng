@@ -1,40 +1,40 @@
-"use client"
-import React, { useEffect, useState, useRef } from 'react';
+"use client";
+import React, { useState, useRef, useCallback } from 'react';
 import "../../globals.css";
+import Image from 'next/image';
+
 const Card = ({ dummyData }) => {
     const [hovered, setHovered] = useState(false);
     const [playVideo, setPlayVideo] = useState(false);
     const videoRef = useRef(null);
+    const timeoutRef = useRef(null);
 
-    useEffect(() => {
-        let timeoutId;
-
-        if (hovered) {
-            timeoutId = setTimeout(() => {
-                setPlayVideo(true);
-                if (videoRef.current) {
-                    videoRef.current.play();
-                }
-            }, 1000); // Adjust the timeout as needed
-        }
-
-        return () => {
-            clearTimeout(timeoutId);
-        };
-    }, [hovered]);
-
-    const handleMouseEnter = () => {
+    // Memoized event handlers to avoid re-creating functions on every render
+    const handleMouseEnter = useCallback(() => {
         setHovered(true);
-    };
+        timeoutRef.current = setTimeout(() => {
+            setPlayVideo(true);
+            if (videoRef.current) {
+                videoRef.current.play().catch(() => {
+                    // Handle video autoplay error (e.g., browser restrictions)
+                    console.log("Autoplay failed");
+                });
+            }
+        }, 1000); // Adjust the timeout as needed
+    }, []);
 
-    const handleMouseLeave = () => {
+    const handleMouseLeave = useCallback(() => {
         setHovered(false);
         setPlayVideo(false);
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
         if (videoRef.current) {
             videoRef.current.pause();
             videoRef.current.currentTime = 0;
         }
-    };
+    }, []);
+
     return (
         <div
             className="rounded-2xl overflow-hidden md:mx-2 sm:mx-1 w-full mb-4
@@ -45,12 +45,25 @@ const Card = ({ dummyData }) => {
             <div className="w-full rounded-2xl overflow-hidden bg-slate-400 relative 
                           aspect-video md:aspect-[3/2] sm:aspect-square">
                 {hovered ? (
-                    <video ref={videoRef} autoPlay={playVideo} className="w-full h-full object-cover">
+                    <video
+                        ref={videoRef}
+                        autoPlay={playVideo}
+                        muted // Required for autoplay in most browsers
+                        playsInline // Required for mobile devices
+                        className="w-full h-full object-cover"
+                        preload="none" // Lazy load video
+                    >
                         <source src={dummyData.videoSource} type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
                 ) : (
-                    <img src={dummyData.previewImage} alt="not" className="w-full h-full object-cover" />
+                    <img 
+
+                        src={dummyData.previewImage}
+                        alt={dummyData.title}
+                        className="w-full h-full object-cover"
+                        loading="lazy" // Lazy load image
+                    />
                 )}
             </div>
             <div className="p-4 md:p-3 sm:p-2">
@@ -82,4 +95,4 @@ const Card = ({ dummyData }) => {
     );
 };
 
-export default Card;
+export default React.memo(Card); // Memoize the component to prevent unnecessary re-renders

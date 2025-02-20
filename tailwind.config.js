@@ -7,6 +7,33 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'alfa': ['"Alfa Slab One"', 'serif'],
+        'grey-qo': ['"Grey Qo"', 'serif'],
+        'noto': ['"Noto Sans"', 'serif'],
+        'pacifico': ['"Pacifico"', 'serif'],
+        'poppins': ['"Poppins"', 'serif'],
+        'roboto': ['"Roboto"', 'serif'],
+        'texturina': ['"Texturina"', 'serif'],
+        'zen-dots': ['"Zen Dots"', 'serif'],
+        'teko': ['"Teko"', 'serif'],
+        'montserrat': ['"Montserrat"', 'serif'],
+        'lora': ['"Lora"', 'serif'],
+      },
+      keyframes: {
+        scaleUp: {
+          "0%": { transform: "scale(0)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        fadeIn: {
+          "0%": { opacity: "0", transform: "-translateY(30px)" },
+                   "100%": { opacity: "1", transform: "-translateY(0)" },
+        },
+      },
+      animation: {
+        scaleUp: "scaleUp 0.5s ease-in-out",
+        fadeInDelayed: "fadeIn 1s ease-in-out 0.7s forwards",
+      },
       colors: {
         blck: {
           500: '#000000', // Your custom color code
