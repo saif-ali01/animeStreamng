@@ -1,33 +1,89 @@
-import React from 'react'
-import styles from "./wallpaper.module.css"
-import "../../../../globals.css";
+"use client"
+import Image from 'next/image'
+import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
+import { FaHeart, FaHeartBroken } from 'react-icons/fa';
+import { FiDownloadCloud } from 'react-icons/fi';
 
-const Page = () => {
+const WallpaperPage = ({ data }) => {
+    const searchParams = useSearchParams();
+    const [anime, setAnime] = useState(null);
+    const [fav, setFav] = useState(true);
+
+    useEffect(() => {
+        const animeParam = searchParams.get("anime"); // Get anime data from query
+        if (animeParam) {
+            try {
+                setAnime(JSON.parse(decodeURIComponent(animeParam))); // Decode and parse JSON data
+            } catch (error) {
+                console.error("Error parsing anime data:", error);
+            }
+        }
+    }, [searchParams]);
+
+    if (!anime) return <p className="text-white text-center mt-10">Loading...</p>;
+    const tags = ["anime", "my hero acedemia ", "bleach ", "naruto ", " one piece", "funny", " action ", "humar", "romance"]
+
     return (
-        <div className={`ml-60 w-screen flex flex-col items-center   `}>
-
-
-            <div className={`${styles.boxShadow} h-3/4 w-4/5   overflow-hidden rounded-3xl bg-slate-50 mt-14 relative`}>
-                <img
-                    src={"/m.jpg"}
-                    className={`w-full h-full object-cover`}
-                    alt=""
-                />
-                <div className={`absolute justify-around items-center flex bottom-0 h-20 w-full ${styles.blurBackground}  `} >
-                    <h1 className=' text-yellow-400 flex '><span style={{ textShadow: "4px 4px 4px rgb(250 ,204 ,21, 0.3) " }} className={` text-yellow-400  ${styles.textShadow} w-full text-3xl tracking-widest opacity-80  `}> ONE PIECE</span></h1>
-                    <h2 className={`text-3xl  ${styles.textShadow}`}> <span style={{ textShadow: "4px 4px 4px rgb(250 ,204 ,21, 0.3) " }} className='text-yellow-400 opacity-80  tracking-widest'>Luffy</span></h2>
-                    <h2 className={` text-2xl  ${styles.textShadow}`}> <span style={{ textShadow: "4px 4px 4px rgb(250 ,204 ,21, 0.3) " }} className='  text-yellow-400  opacity-60' tracking-widest>12-02-2012</span></h2>
-                </div>
-            </div>
-            <div className="div w-96  flex  justify-center">
-                <div className="cursor-pointer downloadbtn relative bottom-10 right-28  flex justify-center items-center">
-                    <a href="/m1.jpg" download className='text-2xl font-bold uppercase  text-black' style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}> Download</a>
+        <div className="w-full h-screen  p-4 sm:p-8 flex justify-center items-start sm:items-center">
+            {/* MAIN CARD CONTAINER */}
+            <div className="w-full max-w-6xl sm:h-[80%] bg-white/10 rounded-2xl sm:rounded-[2rem] overflow-hidden border border-white/30 flex flex-col sm:flex-row">
+                {/* IMAGE SECTION */}
+                <div className="relative w-full sm:w-[50%] h-64 sm:h-auto">
+                    <Image
+                        src={data.previewImage.src} 
+                        alt="wallpaper"
+                        fill
+                        className="object-cover object-center"
+                        loading="lazy"
+                    />
                 </div>
 
-            </div>
+                {/* CONTENT SECTION */}
+                <div className="w-full sm:w-[50%] flex flex-col justify-between p-4 sm:p-6">
+                    {/* TOP BAR */}
+                    <div className="flex  sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 sm:mb-0">
+                        <div className="flex gap-3 sm:gap-5">
+                            <button className="text-gray-300 hover:text-red-500 transition-colors">
+                                {fav ? (
+                                    <FaHeart className="w-6 h-6 sm:w-7 sm:h-7" />
+                                ) : (
+                                    <FaHeartBroken className="w-6 h-6 sm:w-7 sm:h-7" />
+                                )}
+                            </button>
+                            <button className="text-gray-300 hover:text-blue-400 transition-colors">
+                                <a href={data.previewImage.src} download={true}>
+                                    <FiDownloadCloud className="w-6 h-6 sm:w-7 sm:h-7" />
+                                </a>
+                            </button>
+                        </div>
+                        <h1 className="text-lg sm:text-xl text-gray-300 font-poppins font-medium">
+                            {data.title}
+                        </h1>
+                    </div>
 
+                    {/* DESCRIPTION */}
+                    <div className="flex-1  overflow-y-auto py-4 sm:py-6">
+                        <p className="text-sm sm:text-base text-gray-300 font-roboto leading-relaxed">
+                            {data.p}
+                        </p>
+                    </div>
+
+                    {/* TAGS */}
+                    <div className="flex flex-wrap gap-2 mt-4">
+                        {tags.map((data, index) => (
+                            <span
+                                key={index}
+                                className="px-3 py-1 rounded-full bg-black/50 text-xs sm:text-sm text-gray-300 font-roboto"
+                            >
+                                {data}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
 
-export default Page;
+export default WallpaperPage

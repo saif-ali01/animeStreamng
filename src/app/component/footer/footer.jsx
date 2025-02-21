@@ -31,7 +31,6 @@ const Footer = () => {
         <div className="flex items-center mt-3 sm:mt-0">
           Developed by 
           <span className="hover:text-blue-800 ml-2 cursor-pointer">Saif_Ali</span>
-          <SlSocialLinkedin className="hover:text-blue-800 ml-2 mb-1 text-2xl sm:text-3xl cursor-pointer" />
         </div>
       </div>
     </div>

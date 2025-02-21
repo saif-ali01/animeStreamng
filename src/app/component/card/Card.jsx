@@ -59,7 +59,7 @@ const Card = ({ dummyData }) => {
                 ) : (
                     <img 
 
-                        src={dummyData.previewImage}
+                        src={dummyData.previewImage.src}
                         alt={dummyData.title}
                         className="w-full h-full object-cover"
                         loading="lazy" // Lazy load image

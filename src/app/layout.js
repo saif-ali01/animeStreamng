@@ -1,17 +1,13 @@
 import "./globals.css";
 import Sidebar from "./component/sidebar/Sidebar";
 import Head from "next/head";
-import Footer from "./component/footer/footer";
-import Bottombar from "./component/Nav/Bottombar";
-import TopBar from "./component/Nav/TopBar";
 
+import Bottombar from "./component/Nav/Bottombar";
 
 
 export const metadata = {
   title: "Ispase Anime",
   description: "A website to streamin anime ,and download wallpaper ",
-  manifest: "/manifest.json", 
-
 };
 export default function RootLayout({ children }) {
   return (
@@ -28,7 +24,7 @@ export default function RootLayout({ children }) {
         </div>
 
         {/* Main Content - Adjust Width on Mobile */}
-        <div className="flex-1 lg:ml-[15vw] w-full lg:w-[85vw] sm:ml-[100px] ">
+        <div className="flex-1 lg:ml-[15vw] w-full lg:w-[85vw] sm:ml-[100px] overflow-hidden">
           {children}
         </div>
         <Bottombar />
