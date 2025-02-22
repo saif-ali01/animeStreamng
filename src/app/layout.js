@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
         </div>
 
         {/* Main Content - Adjust Width on Mobile */}
-        <div className="flex-1 lg:ml-[13.5vw] w-full lg:w-[85vw] sm:ml-[100px] ">
+        <div className="flex-1 lg:ml-[13.5vw] w-full lg:w-[85vw] sm:ml-[100px] sm:pt-20">
           <div className="w-full flex justify-center items-center">
             <TopBar />
           </div>

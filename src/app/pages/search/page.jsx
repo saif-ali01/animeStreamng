@@ -17,11 +17,55 @@ import Card from "../../component/card/Card";
 import AudioCard from "../../component/Dialog/AudioCard";
 import WallpaperCard from "../../component/wallpaper/WallpaperCard";
 
-// SwiperSection Component to reuse across sections
-const SwiperSection = ({ title, data, CardComponent, linkPath,more }) => {
+// SwiperSectionSkeleton Component
+const SwiperSectionSkeleton = ({ title }) => {
+  const [numCards, setNumCards] = useState(5); // Default to 5 cards
+
+  useEffect(() => {
+    const updateNumCards = () => {
+      if (window.innerWidth >= 1100) {
+        setNumCards(5); // Large screens
+      } else if (window.innerWidth >= 600) {
+        setNumCards(3); // Tablet
+      } else {
+        setNumCards(2); // Mobile
+      }
+    };
+
+    if (typeof window !== "undefined") {
+      updateNumCards();
+      window.addEventListener("resize", updateNumCards);
+      return () => window.removeEventListener("resize", updateNumCards);
+    }
+  }, []);
+
+  return (
+    <div className="max-w-full mt-10 relative">
+      <div className="relative flex items-center justify-between px-11 md:px-8 sm:px-4">
+        <div className="text-blue-500 font-bold tracking-wider font-roboto">
+          <h1 className="sm:text-3xl md:text-4xl text-3xl underline leading-loose py-3 uppercase Latotext">
+            {title}
+          </h1>
+        </div>
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 h-6 w-24 bg-gray-600 animate-pulse rounded" />
+      </div>
+      <div className="relative mt-4">
+        <div className="flex space-x-4 px-5 overflow-hidden">
+          {Array(numCards).fill().map((_, i) => (
+            <div key={i} className="w-64 h-80 bg-gray-700 animate-pulse rounded-lg" />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// SwiperSection Component
+const SwiperSection = ({ title, data, CardComponent, linkPath, more }) => {
   const swiperRef = useRef(null);
   const [slides, setSlides] = useState(5);
   const [slidesGap, setSlidesGap] = useState(50);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const updateSlides = () => {
@@ -38,6 +82,7 @@ const SwiperSection = ({ title, data, CardComponent, linkPath,more }) => {
         setSlides(3);
         setSlidesGap(100);
       }
+      setIsReady(true);
     };
 
     if (typeof window !== "undefined") {
@@ -55,6 +100,8 @@ const SwiperSection = ({ title, data, CardComponent, linkPath,more }) => {
     if (swiperRef.current) swiperRef.current.slidePrev();
   };
 
+  if (!isReady) return <SwiperSectionSkeleton title={title} />;
+
   return (
     <div className="max-w-full mt-10 relative">
       <div className="relative flex items-center justify-between px-11 md:px-8 sm:px-4">
@@ -64,7 +111,7 @@ const SwiperSection = ({ title, data, CardComponent, linkPath,more }) => {
           </h1>
         </div>
         <Link
-          href={more} // Navigate to the section's base path
+          href={more}
           className="absolute right-4 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-700 text-sm sm:text-base font-roboto underline"
         >
           Show More
@@ -113,61 +160,51 @@ const SwiperSection = ({ title, data, CardComponent, linkPath,more }) => {
   );
 };
 
+// Main Page Component
 const Page = () => {
   return (
     <div className="text-white sm:w-full w-full flex justify-center flex-col">
       <div className="w-full mt-5">
-        {/* Trending Section */}
         <SwiperSection
           title="Anime"
           data={animeData}
           CardComponent={NewCard}
-          more={"/pages/search/anime"}
+          more="/pages/search/anime"
           linkPath="/pages/download/anime"
         />
-
-        {/* Twistors Section */}
         <SwiperSection
           title="Twistors"
           data={animeData}
           CardComponent={NewCard}
-          more={"/pages/search/twistor"}
+          more="/pages/search/twistor"
           linkPath="/pages/download/video"
         />
-
-        {/* Raw Section */}
         <SwiperSection
           title="Raw"
           data={animeAudioData}
           CardComponent={Card}
-          more={"/pages/search/raw"}
+          more="/pages/search/raw"
           linkPath="/pages/download/video"
         />
-
-        {/* Flow Frame Section */}
         <SwiperSection
           title="Flow Frame"
           data={animeData}
           CardComponent={NewCard}
-          more={"/pages/search/flowframe"}
+          more="/pages/search/flowframe"
           linkPath="/pages/download/video"
         />
-
-        {/* Dialogues Section */}
         <SwiperSection
           title="Dialogues"
           data={animeAudioData}
           CardComponent={AudioCard}
-          more={"/pages/search/audio"}
+          more="/pages/search/audio"
           linkPath="/pages/download/audio"
         />
-
-        {/* Wallpapers Section */}
         <SwiperSection
           title="Wallpapers"
           data={animeData}
           CardComponent={WallpaperCard}
-          more={"/pages/search/wallpaper"}
+          more="/pages/search/wallpaper"
           linkPath="/pages/download/wallpaper"
         />
       </div>

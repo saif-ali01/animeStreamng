@@ -23,9 +23,9 @@ const Sidebar = () => {
       </div>
 
       {/* Navigation */}
-      <ul className="flex flex-col items-center w-full justify-evenly  mt-2 space-y-6">
+      <ul className="flex flex-col items-center w-full justify-evenly py-2 my-auto space-y-6">
         <SidebarLink href="/" icon={<IoHomeOutline />} text="Home" />
-        <SidebarLink href="/pages/search/category" icon={<TbCategory2 />} text="Category" />
+        <SidebarLink href="/pages/search/category" icon={<TbCategory2 />} text="Anime" />
         <SidebarLink href="/pages/search/flowframe" icon={<MdOutlineSlowMotionVideo />} text="Flowframe" />
         <SidebarLink href="/pages/search/raw" icon={<CiVideoOn />} text="Raw" />
         <SidebarLink href="/pages/search/audio" icon={<LuMusic2 />} text="Anime Dialogue" />
@@ -33,8 +33,8 @@ const Sidebar = () => {
       </ul>
 
       {/* Social Links */}
-      <div className="mt-auto mb-4 w-full border-t border-white/20">
-        <h2 className="text-gray-300 text-sm mt-4 ml-4 hidden lg:block">Follow Us</h2>
+      <div className="mt-auto mb-4 w-full pt-5 border-t border-white/20">
+        <h2 className="text-gray-300 text-sm mt-4 ml-4 hidden lg:block spae-y-4">Follow Us</h2>
         <ul className="flex flex-col justify-around items-center w-full space-y-2 mt-2">
           <SidebarLink href="#" icon={<FaInstagram />} text="Instagram" />
           <SidebarLink href="#" icon={<FaYoutube />} text="Youtube" />

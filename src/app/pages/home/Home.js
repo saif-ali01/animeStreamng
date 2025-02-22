@@ -15,7 +15,7 @@ const Home = () => {
       <NewCardsWrapper />
       <Wallpaper />
       <Dialog />
-      <Footer />
+
     </div>
   );
 };
