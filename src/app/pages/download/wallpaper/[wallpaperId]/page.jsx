@@ -12,6 +12,7 @@ const WallpaperPage = ({ data }) => {
 
     useEffect(() => {
         const animeParam = searchParams.get("anime"); // Get anime data from query
+        console.log(animeParam)
         if (animeParam) {
             try {
                 setAnime(JSON.parse(decodeURIComponent(animeParam))); // Decode and parse JSON data
@@ -31,7 +32,7 @@ const WallpaperPage = ({ data }) => {
                 {/* IMAGE SECTION */}
                 <div className="relative w-full sm:w-[50%] h-64 sm:h-auto">
                     <Image
-                        src={data.previewImage.src} 
+                        src={anime.previewImage.src} 
                         alt="wallpaper"
                         fill
                         className="object-cover object-center"
@@ -52,20 +53,20 @@ const WallpaperPage = ({ data }) => {
                                 )}
                             </button>
                             <button className="text-gray-300 hover:text-blue-400 transition-colors">
-                                <a href={data.previewImage.src} download={true}>
+                                <a href={anime.previewImage.src} download={true}>
                                     <FiDownloadCloud className="w-6 h-6 sm:w-7 sm:h-7" />
                                 </a>
                             </button>
                         </div>
                         <h1 className="text-lg sm:text-xl text-gray-300 font-poppins font-medium">
-                            {data.title}
+                            {anime.title}
                         </h1>
                     </div>
 
                     {/* DESCRIPTION */}
                     <div className="flex-1  overflow-y-auto py-4 sm:py-6">
                         <p className="text-sm sm:text-base text-gray-300 font-roboto leading-relaxed">
-                            {data.p}
+                            {anime.desc}
                         </p>
                     </div>
 

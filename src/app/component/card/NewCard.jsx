@@ -12,7 +12,7 @@ const NewCard = ({ data }) => {
         <Image
           src={data.previewImage}
           alt={data.title || "Anime"}
-        layout="fill"
+          fill
           className="h-full w-full rounded-lg object-cover transition-transform duration-300 group-hover:scale-110"
         />
       </div>
@@ -20,7 +20,7 @@ const NewCard = ({ data }) => {
       {/* Anime Info */}
       <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-center  py-2">
         <h1 className="sm:text-base text-sm text-white">{data.title}</h1>
-        <h2 className="sm:text-sm text-xs text-gray-300">{data.type }</h2>
+        <h2 className="sm:text-sm text-xs text-gray-300">{data.type}</h2>
       </div>
 
       {/* Play Button - Visible on Hover */}

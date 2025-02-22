@@ -34,12 +34,11 @@ const WallpaperCard = ({ data }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Skeleton Placeholder */}
-      {loading && <div className="absolute inset-0 bg-black/40 h-full w-full animate-pulse"></div>}
-
+     
+     
       {/* Image (Loads only when in viewport) */}
       <div className="relative w-full h-full">
-        {isVisible && (
+        
           <Image
             src={data.previewImage.src}
             alt={data.title}
@@ -51,7 +50,7 @@ const WallpaperCard = ({ data }) => {
             }`}
             onLoad={() => setLoading(false)}
           />
-        )}
+      
       </div>
 
       {/* Like Button */}

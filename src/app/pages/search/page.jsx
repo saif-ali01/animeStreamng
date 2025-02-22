@@ -1,136 +1,178 @@
-'use client'
-import React from 'react'
-import Search from "../../component/search/search"
-import { useParams, usePathname, useRouter } from 'next/navigation';
-import AudioCard from '../../component/Dialog/AudioCard';
-import Card from '../../component/card/Card';
-import WallpaperCard from '../../component/wallpaper/WallpaperCard';
-import TrendingCard from '../../component/trendingCard/TrendingCard';
-import Link from 'next/link';
-import "../../globals.css"
-import animeData from '../../data/animeData';
-import animeAudioData from '../../data/animeAudioData';
-import NewCard from '../../component/card/NewCard';
-import WallpaperPage from '../download/wallpaper/[wallpaperId]/page';
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import Link from "next/link";
+import "../../globals.css";
+import animeData from "../../data/animeData";
+import animeAudioData from "../../data/animeAudioData";
+import NewCard from "../../component/card/NewCard";
+import Card from "../../component/card/Card";
+import AudioCard from "../../component/Dialog/AudioCard";
+import WallpaperCard from "../../component/wallpaper/WallpaperCard";
+
+// SwiperSection Component to reuse across sections
+const SwiperSection = ({ title, data, CardComponent, linkPath,more }) => {
+  const swiperRef = useRef(null);
+  const [slides, setSlides] = useState(5);
+  const [slidesGap, setSlidesGap] = useState(50);
+
+  useEffect(() => {
+    const updateSlides = () => {
+      if (window.innerWidth > 1100) {
+        setSlides(5);
+        setSlidesGap(50);
+      } else if (window.innerWidth > 800) {
+        setSlides(4);
+        setSlidesGap(50);
+      } else if (window.innerWidth > 600) {
+        setSlides(3);
+        setSlidesGap(60);
+      } else {
+        setSlides(3);
+        setSlidesGap(100);
+      }
+    };
+
+    if (typeof window !== "undefined") {
+      updateSlides();
+      window.addEventListener("resize", updateSlides);
+      return () => window.removeEventListener("resize", updateSlides);
+    }
+  }, []);
+
+  const handleNext = () => {
+    if (swiperRef.current) swiperRef.current.slideNext();
+  };
+
+  const handlePrev = () => {
+    if (swiperRef.current) swiperRef.current.slidePrev();
+  };
+
+  return (
+    <div className="max-w-full mt-10 relative">
+      <div className="relative flex items-center justify-between px-11 md:px-8 sm:px-4">
+        <div className="text-blue-500 font-bold tracking-wider font-roboto">
+          <h1 className="sm:text-3xl md:text-4xl text-3xl underline leading-loose py-3 uppercase Latotext">
+            {title}
+          </h1>
+        </div>
+        <Link
+          href={more} // Navigate to the section's base path
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-700 text-sm sm:text-base font-roboto underline"
+        >
+          Show More
+        </Link>
+      </div>
+      <div className="w-full absolute top-[40%] -translate-y-1/2 px-5 z-50 flex justify-between">
+        <button
+          onClick={handlePrev}
+          className="w-14 h-14 flex items-center justify-center bg-black/50 text-white rounded-full hover:bg-black transition cursor-pointer z-50 absolute left-0"
+        >
+          <FaAngleLeft className="w-8 h-8" />
+        </button>
+        <button
+          onClick={handleNext}
+          className="w-14 h-14 flex items-center justify-center bg-black/50 text-white rounded-full hover:bg-black transition cursor-pointer z-50 absolute right-0"
+        >
+          <FaAngleRight className="w-8 h-8" />
+        </button>
+      </div>
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        pagination={false}
+        scrollbar={{ draggable: true }}
+        spaceBetween={slidesGap}
+        slidesPerView={slides}
+        loop={true}
+        onSwiper={(swiper) => (swiperRef.current = swiper)}
+        className="relative"
+      >
+        {data.map((item) => (
+          <SwiperSlide key={item.id} className="px-2">
+            <Link
+              href={{
+                pathname: `${linkPath}/${item.id}`,
+                query: linkPath.includes("audio") || linkPath.includes("wallpaper")
+                  ? { anime: JSON.stringify(item) }
+                  : undefined,
+              }}
+            >
+              <CardComponent data={item} />
+            </Link>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  );
+};
 
 const Page = () => {
+  return (
+    <div className="text-white sm:w-full w-full flex justify-center flex-col">
+      <div className="w-full mt-5">
+        {/* Trending Section */}
+        <SwiperSection
+          title="Anime"
+          data={animeData}
+          CardComponent={NewCard}
+          more={"/pages/search/anime"}
+          linkPath="/pages/download/anime"
+        />
 
+        {/* Twistors Section */}
+        <SwiperSection
+          title="Twistors"
+          data={animeData}
+          CardComponent={NewCard}
+          more={"/pages/search/twistor"}
+          linkPath="/pages/download/video"
+        />
 
-    return (
-        <div className={`text-white sm:w-[full] w-full  flex justify-center flex-col`}>
-            <Search />
-            <div className={`w-full mt-5`}>
-                <div className="flex flex-col gap-7">
-                    <h1 className='flex justify-center ml-5 text-blue-500  tracking-widest'>
-                        <span className={`w-full text-3xl lg:text-7xl mt-16 Latotext`}>Tranding</span>
-                    </h1>
-                    <div className="mt-3 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mx-5">
-                        {animeData.map((data, index) => (
-                            <Link key={index}
-                                href={{
-                                    pathname: `/pages/download/video/${data.id}`,
-                                }}
-                                as={`/pages/download/video/${data.id}`}
-                                state={{ anime: data }}
-                            >
-                                <NewCard data={data} />
-                            </Link>
-                        ))}
-                    </div>
-                </div>
+        {/* Raw Section */}
+        <SwiperSection
+          title="Raw"
+          data={animeAudioData}
+          CardComponent={Card}
+          more={"/pages/search/raw"}
+          linkPath="/pages/download/video"
+        />
 
-                <div className="flex flex-col gap-7">
-                    <h1 className='flex justify-center Latotext ml-5 text-blue-500 tracking-widest'>
-                        <span className={`w-full text-3xl lg:text-7xl mt-16`}>Twistors</span>
-                    </h1>
-                    <div className="mt-3 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mx-5">
-                        {animeData.map((data, index) => (
-                            <Link key={index} href={{
-                                pathname: `/pages/download/video/${data.id}`,
-                            }}
-                                as={`/pages/download/video/${data.id}`}
-                                state={{ anime: data }}
-                            >
-                                <NewCard data={data} />
-                            </Link>
-                        ))}
-                    </div>
-                </div>
+        {/* Flow Frame Section */}
+        <SwiperSection
+          title="Flow Frame"
+          data={animeData}
+          CardComponent={NewCard}
+          more={"/pages/search/flowframe"}
+          linkPath="/pages/download/video"
+        />
 
-                <div className="flex flex-col gap-7">
-                    <h1 className='flex justify-center Latotext ml-5 text-blue-500 tracking-widest'>
-                        <span className={`w-full text-3xl lg:text-7xl mt-16`}>Raw</span>
-                    </h1>
-                    <div className="mt-3 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mx-5">
-                        {animeAudioData.map((data, index) => (
-                            <Link key={index} href={{
-                                pathname: `/pages/download/video/${data.id}`,
-                            }}
-                                as={`/pages/download/video/${data.id}`}
-                                state={{ anime: data }}
-                            >
-                                <Card dummyData={data} />
-                            </Link>
-                        ))}
-                    </div>
-                </div>
+        {/* Dialogues Section */}
+        <SwiperSection
+          title="Dialogues"
+          data={animeAudioData}
+          CardComponent={AudioCard}
+          more={"/pages/search/audio"}
+          linkPath="/pages/download/audio"
+        />
 
-                <div className="flex flex-col gap-7">
-                    <h1 className='flex justify-center Latotext ml-5 text-blue-500 tracking-widest'>
-                        <span className={`w-full text-3xl lg:text-7xl mt-16`}>Flow Frame</span>
-                    </h1>
-                    <div className="mt-3 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mx-5">
-                        {animeData.map((data, index) => (
-                            <Link key={index} href={{
-                                pathname: `/pages/download/video/${data.id}`,
-                            }}
-                                as={`/pages/download/video/${data.id}`}
-                                state={{ anime: data }}
-                            >
-                                <NewCard data={data} />
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="flex flex-col gap-7">
-                    <h1 className='flex justify-center Latotext ml-5 text-blue-500 tracking-widest'>
-                        <span className={`w-full text-3xl lg:text-7xl mt-16`}>Dialogues</span>
-                    </h1>
-                    <div className="mt-3 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mx-5">
-                        {animeAudioData.map((data, index) => (
-                            <Link
-                                key={data.id} // Use a unique identifier instead of index
-                                href={{
-                                    pathname: `/pages/download/audio/${data.id}`,
-                                    query: { anime: JSON.stringify(data) }, // Ensure correct formatting
-                                }}
-                            >
-                                <AudioCard data={data} />
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="flex flex-col gap-7">
-                    <h1 className='flex justify-center Latotext ml-5 text-blue-500 tracking-widest '>
-                        <span className={`w-full text-3xl lg:text-7xl mt-16`}>Wallpapers</span>
-                    </h1>
-                    <div className="mt-3 grid grid-col-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 mx-5">
-                        {animeData.map((data, index) => (
-                            <Link
-                                key={data.id}
-                                href={`/pages/download/wallpaper/${data.id}?anime=${encodeURIComponent(JSON.stringify(data))}`}
-                            >
-                                <WallpaperCard data={data} />
-                            </Link>
-
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
+        {/* Wallpapers Section */}
+        <SwiperSection
+          title="Wallpapers"
+          data={animeData}
+          CardComponent={WallpaperCard}
+          more={"/pages/search/wallpaper"}
+          linkPath="/pages/download/wallpaper"
+        />
+      </div>
+    </div>
+  );
+};
 
 export default Page;

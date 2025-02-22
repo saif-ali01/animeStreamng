@@ -50,7 +50,7 @@ const Dialogue = () => {
       <div className="text-yellow-400 text-3xl uppercase inline-flex font-bold tracking-wider ml-11 font-roboto">
         <h1 className="robo mb-2 underline">Dialogue</h1>
       </div>
-      <div className="mt-3 grid xl:grid-cols-3 sm:grid-cols-2 gap-4" ref={containerRef}>
+      <div className="mt-3 grid xl:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-4" ref={containerRef}>
         {animeAudioData.map((data, index) => (
           <div key={index} data-index={index} className="audio-card">
             {visibleCards.has(index.toString()) ? <AudioCard data={data} /> : <LoadingSkeleton />}

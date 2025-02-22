@@ -11,7 +11,6 @@ import NewCardsWrapper from "../../component/card/NewCardsWrapper";
 const Home = () => {
   return (
     <div className="sm:w-[full] w-full flex justify-center flex-col">
-      <Topbar />
       <HeaderWrapper />
       <NewCardsWrapper />
       <Wallpaper />

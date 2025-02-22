@@ -95,8 +95,8 @@ const AudioCard = ({ data }) => {
                             src={data.previewImage.src}
                             alt={data.title}
                             className="w-16 mt-4 ml-4 h-full rounded-lg object-cover"
-                            width={223}
-                            height={223}
+                            width={112}
+                            height={111}
                             loading="lazy"
                         />
                         <div className="absolute w-16 ml-6 top-16 inset-x-0 bottom-0 h-2 bg-gradient-to-t from-transparent to-gray-400 filter blur-lg"></div>
